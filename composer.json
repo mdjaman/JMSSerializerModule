@@ -1,5 +1,5 @@
 {
-    "name": "unixslayer/jms-serializer-module",
+    "name": "tomasmihalicka/jms-serializer-module",
     "description": "Zend Framework 2 Module that integrates the jms serializer library",
     "type": "library",
     "license": "MIT",
@@ -24,6 +24,11 @@
             "homepage": "http://unixslayer.pl"
         },
         {
+            "name": "Tomas Mihalicka",
+            "email": "tomas@mihalicka.com",
+            "homepage": "http://mihalicka.com"
+        },
+        {
             "name": "Community contributions",
             "homepage": "https://github.com/Spea/JMSSerializerModule/contributors"
         }
@@ -32,7 +37,7 @@
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.*",
         "doctrine/doctrine-module": ">=0.5.1",
-        "jms/serializer": "1.0.*"
+        "jms/serializer": "1.*"
     },
     "require-dev": {
         "zendframework/zend-developer-tools": "dev-master"
