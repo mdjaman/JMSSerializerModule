@@ -42,7 +42,6 @@ class Visitors extends AbstractOptions
     public function setSerialization($subscribers)
     {
         $this->serialization = $subscribers;
-
         return $this;
     }
 
@@ -72,10 +71,12 @@ class Visitors extends AbstractOptions
 
     /**
      * @param array $json
+     * @return $this
      */
     public function setJson($json)
     {
         $this->json = $json;
+        return $this;
     }
 
     /**
@@ -88,10 +89,12 @@ class Visitors extends AbstractOptions
 
     /**
      * @param array $xml
+     * @return $this
      */
     public function setXml($xml)
     {
         $this->xml = $xml;
+        return $this;
     }
 
     /**

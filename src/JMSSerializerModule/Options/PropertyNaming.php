@@ -53,7 +53,6 @@ class PropertyNaming extends AbstractOptions
     public function setSeparator($cache)
     {
         $this->separator = $cache;
-
         return $this;
     }
 
@@ -73,7 +72,6 @@ class PropertyNaming extends AbstractOptions
     public function setLowercase($debug)
     {
         $this->lowerCase = $debug;
-
         return $this;
     }
 
@@ -93,7 +91,6 @@ class PropertyNaming extends AbstractOptions
     public function setEnableCache($inferTypesFromDoctrineMetadata)
     {
         $this->enableCache = $inferTypesFromDoctrineMetadata;
-
         return $this;
     }
 

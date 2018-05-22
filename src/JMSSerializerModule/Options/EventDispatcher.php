@@ -27,7 +27,6 @@ class EventDispatcher extends AbstractOptions
     public function setSubscribers($subscribers)
     {
         $this->subscribers = $subscribers;
-
         return $this;
     }
 

@@ -34,7 +34,6 @@ class Handlers extends AbstractOptions
     public function setSubscribers($subscribers)
     {
         $this->subscribers = $subscribers;
-
         return $this;
     }
 
@@ -54,7 +53,6 @@ class Handlers extends AbstractOptions
     public function setDatetime($datetime)
     {
         $this->datetime = $datetime;
-
         return $this;
     }
 

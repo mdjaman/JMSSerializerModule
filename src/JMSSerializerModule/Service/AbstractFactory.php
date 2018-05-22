@@ -43,7 +43,6 @@ abstract class AbstractFactory implements FactoryInterface
         }
 
         $optionsClass = $this->getOptionsClass();
-
         return new $optionsClass($options);
     }
 

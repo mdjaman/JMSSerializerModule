@@ -70,7 +70,6 @@ class Metadata extends AbstractOptions
     public function setCache($cache)
     {
         $this->cache = $cache;
-
         return $this;
     }
 
@@ -90,7 +89,6 @@ class Metadata extends AbstractOptions
     public function setDirectories($directory)
     {
         $this->directories = $directory;
-
         return $this;
     }
 
@@ -110,7 +108,6 @@ class Metadata extends AbstractOptions
     public function setDebug($debug)
     {
         $this->debug = $debug;
-
         return $this;
     }
 
@@ -130,7 +127,6 @@ class Metadata extends AbstractOptions
     public function setFileCache($fileCache)
     {
         $this->fileCache = $fileCache;
-
         return $this;
     }
 
@@ -150,7 +146,6 @@ class Metadata extends AbstractOptions
     public function setInferTypesFromDoctrineMetadata($inferTypesFromDoctrineMetadata)
     {
         $this->inferTypesFromDoctrineMetadata = $inferTypesFromDoctrineMetadata;
-
         return $this;
     }
 
@@ -175,7 +170,7 @@ class Metadata extends AbstractOptions
      */
     public function getAnnotationCache()
     {
-        return "doctrine.cache.{$this->annotationCache}";;
+        return "doctrine.cache.{$this->annotationCache}";
     }
 
 }
