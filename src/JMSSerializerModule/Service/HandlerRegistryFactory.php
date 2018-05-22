@@ -38,8 +38,7 @@ class HandlerRegistryFactory extends AbstractFactory
             }
             throw new InvalidArgumentException(sprintf(
                 'Invalid subscriber "%s" given, must be a service name, '
-                    . 'class name or an instance implementing JMS\Serializer\Handler\SubscribingHandlerInterface;
-',
+                    . 'class name or an instance implementing JMS\Serializer\Handler\SubscribingHandlerInterface;',
                 is_object($subscriberName)
                     ? get_class($subscriberName)
                     : (is_string($subscriberName) ? $subscriberName : gettype($subscriber))

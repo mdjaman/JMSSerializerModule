@@ -2,10 +2,6 @@
 
 namespace JMSSerializerModule\Service;
 
-use Application\Module;
-use JMS\Serializer\Handler\DateHandler;
-use Metadata\Driver\FileLocator;
-use Zend\ModuleManager\ModuleManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -36,8 +32,6 @@ class MetadataDriverFactory implements FactoryInterface
     {
         $driver = $this->driver;
         $fileLocator = $serviceLocator->get('jms_serializer.metadata.file_locator');
-        $driver = new $driver($fileLocator);
-
-        return $driver;
+        return new $driver($fileLocator);
     }
 }
