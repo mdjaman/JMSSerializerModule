@@ -45,7 +45,7 @@
         "zendframework/zend-servicemanager": "^3.0",
         "zendframework/zend-stdlib": "^3.0",
         "zendframework/zend-view": "2.*",
-        "doctrine/doctrine-common": "2.7.*",
+        "doctrine/common": "2.7.*",
         "jms/serializer": "1.*"
     },
     "require-dev": {
@@ -59,7 +59,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.1-dev"
+            "dev-master": "2.x-dev"
         }
     }
 }
