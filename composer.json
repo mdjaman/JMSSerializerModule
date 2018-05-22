@@ -1,5 +1,5 @@
 {
-    "name": "tomasmihalicka/jms-serializer-module",
+    "name": "mdjaman/jms-serializer-module",
     "description": "Zend Framework 2 Module that integrates the jms serializer library",
     "type": "library",
     "license": "MIT",
@@ -10,7 +10,9 @@
         "xml",
         "jms",
         "module",
-        "zf2"
+        "zendframework",
+        "zf2",
+        "zf3"
     ],
     "authors": [
         {
@@ -27,6 +29,11 @@
             "name": "Tomas Mihalicka",
             "email": "tomas@mihalicka.com",
             "homepage": "http://mihalicka.com"
+        },
+        {
+            "name": "Marcel Djaman",
+            "email": "marceldjaman@gmail.com",
+            "homepage": "https://github.com/mdjaman"
         },
         {
             "name": "Community contributions",
