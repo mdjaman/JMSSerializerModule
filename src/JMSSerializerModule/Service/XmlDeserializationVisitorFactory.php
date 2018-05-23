@@ -23,10 +23,7 @@ class XmlDeserializationVisitorFactory implements FactoryInterface
         $options = new Visitors($options['jms_serializer']['visitors']);
 
         $xmlOptions = $options->getXml();
-        $visitor = new XmlDeserializationVisitor(
-            $container->get('jms_serializer.naming_strategy'),
-            $container->get('jms_serializer.object_constructor')
-        );
+        $visitor = new XmlDeserializationVisitor($container->get('jms_serializer.naming_strategy'));
         $visitor->setDoctypeWhitelist($xmlOptions['doctype_whitelist']);
         return $visitor;
     }
