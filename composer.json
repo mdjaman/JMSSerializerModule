@@ -8,6 +8,7 @@
         "deserialize",
         "json",
         "xml",
+        "yml",
         "jms",
         "module",
         "zendframework",
@@ -47,9 +48,6 @@
         "zendframework/zend-view": "2.*",
         "doctrine/common": "2.7.*",
         "jms/serializer": "1.*"
-    },
-    "require-dev": {
-        "zendframework/zend-developer-tools": "dev-master"
     },
     "minimum-stability": "dev",
     "autoload": {

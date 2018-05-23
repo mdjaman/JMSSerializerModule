@@ -4,6 +4,7 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
+use JMSSerializerModule\Options\PropertyNaming;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
