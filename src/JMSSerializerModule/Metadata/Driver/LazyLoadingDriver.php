@@ -2,29 +2,41 @@
 
 namespace JMSSerializerModule\Metadata\Driver;
 
+use Interop\Container\ContainerInterface;
 use Metadata\Driver\DriverInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>
  */
 class LazyLoadingDriver implements DriverInterface
 {
-    private $serviceLocator;
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
+    /**
+     * @var string
+     */
     private $realDriverId;
 
-    public function __construct(ServiceLocatorInterface $container, $realDriverId)
+    /**
+     * LazyLoadingDriver constructor.
+     * @param ContainerInterface $container
+     * @param $realDriverId
+     */
+    public function __construct(ContainerInterface $container, $realDriverId)
     {
-        $this->serviceLocator = $container;
+        $this->container = $container;
         $this->realDriverId = $realDriverId;
     }
 
 
     /**
-     * {@ineheritdoc}
+     * {@inheritdoc}
      */
     public function loadMetadataForClass(\ReflectionClass $class)
     {
-        return $this->serviceLocator->get($this->realDriverId)->loadMetadataForClass($class);
+        return $this->container->get($this->realDriverId)->loadMetadataForClass($class);
     }
 }

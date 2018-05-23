@@ -2,10 +2,10 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMSSerializerModule\Options\Metadata;
 use Metadata\MetadataFactory;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class SerializerMetadataFactory
@@ -16,14 +16,17 @@ class SerializerMetadataFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return MetadataFactory
+     * {@inheritDoc}
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('Configuration');
+        $config = $container->get('Configuration');
         $metadata = new Metadata($config['jms_serializer']['metadata']);
-        $lazyLoadingDriver = $serviceLocator->get('jms_serializer.metadata.lazy_loading_driver');
-        return new MetadataFactory($lazyLoadingDriver, 'Metadata\ClassHierarchyMetadata', $metadata->getDebug());
+        $lazyLoadingDriver = $container->get('jms_serializer.metadata.lazy_loading_driver');
+        return new MetadataFactory(
+            $lazyLoadingDriver,
+            'Metadata\ClassHierarchyMetadata',
+            $metadata->getDebug()
+        );
     }
 }

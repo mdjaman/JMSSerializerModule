@@ -2,10 +2,10 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\Handler\DateHandler;
 use JMSSerializerModule\Options\Handlers;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class DateTimeHandlerFactory
@@ -16,12 +16,14 @@ class DateTimeHandlerFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return DateHandler
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return DateHandler|object
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $serviceLocator->get('Configuration');
+        $options = $container->get('Configuration');
         $handlers = new Handlers($options['jms_serializer']['handlers']);
         $dateTimeOptions = $handlers->getDatetime();
         return new DateHandler($dateTimeOptions['default_format'], $dateTimeOptions['default_timezone']);

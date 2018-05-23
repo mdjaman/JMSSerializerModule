@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMSSerializerModule\View\Serializer;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class SerializerViewHelperFactory
@@ -17,9 +17,8 @@ class SerializerViewHelperFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function createService(ServiceLocatorInterface $helpers)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $sm = $helpers->getServiceLocator();
-        return new Serializer($sm->get('jms_serializer.serializer'));
+        return new Serializer($container->get('jms_serializer.serializer'));
     }
 }

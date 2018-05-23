@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\Metadata\Driver\PhpDriver;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class MetadataPhpDriverFactory
@@ -15,10 +15,12 @@ class MetadataPhpDriverFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return void
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return MetadataDriverFactory
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         new MetadataDriverFactory(PhpDriver::class);
     }

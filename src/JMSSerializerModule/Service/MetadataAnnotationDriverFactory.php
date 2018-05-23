@@ -5,10 +5,10 @@ namespace JMSSerializerModule\Service;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Annotations\IndexedReader;
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\Metadata\Driver\AnnotationDriver;
 use JMSSerializerModule\Options\Metadata;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class MetadataDriverChainFactory
@@ -19,19 +19,21 @@ class MetadataAnnotationDriverFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return AnnotationDriver|mixed
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return AnnotationDriver|object
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('Configuration');
+        $config = $container->get('Configuration');
         $metadata = new Metadata($config['jms_serializer']['metadata']);
 
         $annotationReader = new AnnotationReader();
         $cachedReader = new CachedReader(
             new IndexedReader($annotationReader),
-            $serviceLocator->get($metadata->getAnnotationCache())
+            $container->get($metadata->getAnnotationCache())
         );
         return new AnnotationDriver($cachedReader);
     }

@@ -2,36 +2,32 @@
 
 namespace JMSSerializerModule\Service;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\AbstractFactoryInterface;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>
  */
-class MetadataDriverFactory implements FactoryInterface
+class MetadataDriverFactory implements AbstractFactoryInterface
 {
 
     /**
-     * @var string
+     * {@inheritdoc}
      */
-    protected $driver;
-
-    /**
-     * @param string $driver
-     */
-    public function __construct($driver)
+    public function canCreate(ContainerInterface $container, $requestedName)
     {
-        $this->driver = $driver;
+        return class_exists($requestedName);
     }
 
-
     /**
-     * {@inheritDoc}
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return mixed
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $driver = $this->driver;
-        $fileLocator = $serviceLocator->get('jms_serializer.metadata.file_locator');
-        return new $driver($fileLocator);
+        $fileLocator = $container->get('jms_serializer.metadata.file_locator');
+        return new $requestedName($fileLocator);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\Naming\CacheNamingStrategy;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>
@@ -11,14 +11,14 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class NamingStrategyFactory extends AbstractFactory
 {
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var $options \JMSSerializerModule\Options\PropertyNaming */
-        $options = $this->getOptions($serviceLocator, 'property_naming');
+        $options = $this->getOptions($container, 'property_naming');
         /** @var $namingStrategy \JMS\Serializer\Naming\PropertyNamingStrategyInterface */
-        $namingStrategy = $serviceLocator->get('jms_serializer.serialized_name_annotation_strategy');
+        $namingStrategy = $container->get('jms_serializer.serialized_name_annotation_strategy');
         if ($options->getEnableCache()) {
             $namingStrategy = new CacheNamingStrategy($namingStrategy);
         }

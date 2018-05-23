@@ -2,10 +2,10 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\JsonSerializationVisitor;
 use JMSSerializerModule\Options\Visitors;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class JsonSerializationVisitorFactory
@@ -16,16 +16,18 @@ class JsonSerializationVisitorFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return JsonSerializationVisitor
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return JsonSerializationVisitor|object
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $config = $serviceLocator->get('Configuration');
+        $config = $container->get('Configuration');
         $options = new Visitors($config['jms_serializer']['visitors']);
 
         $jsonOptions = $options->getJson();
-        $visitor = new JsonSerializationVisitor($serviceLocator->get('jms_serializer.naming_strategy'));
+        $visitor = new JsonSerializationVisitor($container->get('jms_serializer.naming_strategy'));
         $visitor->setOptions($jsonOptions['options']);
         return $visitor;
     }

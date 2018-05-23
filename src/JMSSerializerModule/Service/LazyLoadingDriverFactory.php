@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMSSerializerModule\Metadata\Driver\LazyLoadingDriver;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class LazyLoadingDriverFactory
@@ -15,11 +15,13 @@ class LazyLoadingDriverFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return LazyLoadingDriver
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return LazyLoadingDriver|object
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        return new LazyLoadingDriver($serviceLocator, 'jms_serializer.metadata_driver');
+        return new LazyLoadingDriver($container, 'jms_serializer.metadata_driver');
     }
 }

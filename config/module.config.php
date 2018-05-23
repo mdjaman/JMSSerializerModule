@@ -11,6 +11,9 @@
 
 namespace JMSSerializerModule;
 
+use JMS\Serializer\Metadata\Driver\PhpDriver;
+use JMS\Serializer\Metadata\Driver\XmlDriver;
+use JMS\Serializer\Metadata\Driver\YamlDriver;
 use JMSSerializerModule\Service\SerializerViewHelperFactory;
 
 return array(
@@ -68,15 +71,18 @@ return array(
         'aliases' => array(
             'jms_serializer.metadata_driver' => 'jms_serializer.metadata.chain_driver',
             'jms_serializer.object_constructor' => 'jms_serializer.unserialize_object_constructor',
+            'jms_serializer.metadata.yaml_driver' => YamlDriver::class,
+            'jms_serializer.metadata.xml_driver' => XmlDriver::class,
+            'jms_serializer.metadata.php_driver' => PhpDriver::class,
         ),
         'factories' => array(
             'jms_serializer.handler_registry' => Service\HandlerRegistryFactory::class,
             'jms_serializer.datetime_handler' => Service\DateTimeHandlerFactory::class,
             'jms_serializer.event_dispatcher' => Service\EventDispatcherFactory::class,
             'jms_serializer.metadata.cache' => Service\MetadataCacheFactory::class,
-            'jms_serializer.metadata.yaml_driver' => Service\MetadataYamlDriverFactory::class,
-            'jms_serializer.metadata.xml_driver' => Service\MetadataXmlDriverFactory::class,
-            'jms_serializer.metadata.php_driver' => Service\MetadataPhpDriverFactory::class,
+            YamlDriver::class => Service\MetadataDriverFactory::class,
+            XmlDriver::class => Service\MetadataDriverFactory::class,
+            PhpDriver::class => Service\MetadataDriverFactory::class,
             'jms_serializer.metadata.file_locator' => Service\MetadataFileLocatorFactory::class,
             'jms_serializer.metadata.annotation_driver' => Service\MetadataAnnotationDriverFactory::class,
             'jms_serializer.metadata.chain_driver' => Service\MetadataDriverChainFactory::class,

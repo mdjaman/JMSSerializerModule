@@ -2,6 +2,7 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use JMS\Serializer\EventDispatcher\EventDispatcher;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
@@ -13,10 +14,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class EventDispatcherFactory extends AbstractFactory
 {
 
-    /**
-     * {@inheritDoc}
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var $options \JMSSerializerModule\Options\Handlers */
         $options      = $this->getOptions($serviceLocator, 'eventdispatcher');

@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class CamelCaseNamingStrategyFactory
@@ -15,12 +15,14 @@ class CamelCaseNamingStrategyFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return CamelCaseNamingStrategy
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return CamelCaseNamingStrategy|object
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $serviceLocator->get('Configuration');
+        $options = $container->get('Configuration');
         $propertyNaming = new PropertyNaming($options['jms_serializer']['property_naming']);
         return new CamelCaseNamingStrategy($propertyNaming->getSeparator(), $propertyNaming->getLowercase());
     }

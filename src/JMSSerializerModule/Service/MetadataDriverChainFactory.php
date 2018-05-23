@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use Metadata\Driver\DriverChain;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class MetadataDriverChainFactory
@@ -15,15 +15,18 @@ class MetadataDriverChainFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
      * @return DriverChain
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $annotationDriver = $serviceLocator->get('jms_serializer.metadata.annotation_driver');
-        $phpDriver = $serviceLocator->get('jms_serializer.metadata.php_driver');
-        $xmlDriver = $serviceLocator->get('jms_serializer.metadata.xml_driver');
-        $yamlDriver = $serviceLocator->get('jms_serializer.metadata.yaml_driver');
-        return new DriverChain(array($yamlDriver, $xmlDriver, $phpDriver, $annotationDriver));
+        $annotationDriver = $container->get('jms_serializer.metadata.annotation_driver');
+        $phpDriver = $container->get('jms_serializer.metadata.php_driver');
+        $xmlDriver = $container->get('jms_serializer.metadata.xml_driver');
+        $yamlDriver = $container->get('jms_serializer.metadata.yaml_driver');
+        $driverChain = array($yamlDriver, $xmlDriver, $phpDriver, $annotationDriver);
+        return new DriverChain($driverChain);
     }
 }

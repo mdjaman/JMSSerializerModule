@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class SerializedNameAnnotationStrategyFactory
@@ -15,17 +15,16 @@ class SerializedNameAnnotationStrategyFactory implements FactoryInterface
 {
 
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return SerializedNameAnnotationStrategy
+     * {@inheritDoc}
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $serviceLocator->get('Configuration');
+        $options = $container->get('Configuration');
         if (isset($options['jms_serializer']['naming_strategy'])) {
             if ($options['jms_serializer']['naming_strategy'] === 'identical') {
-                return new SerializedNameAnnotationStrategy($serviceLocator->get('jms_serializer.identical_naming_strategy'));
+                return new SerializedNameAnnotationStrategy($container->get('jms_serializer.identical_naming_strategy'));
             }
         }
-        return new SerializedNameAnnotationStrategy($serviceLocator->get('jms_serializer.camel_case_naming_strategy'));
+        return new SerializedNameAnnotationStrategy($container->get('jms_serializer.camel_case_naming_strategy'));
     }
 }

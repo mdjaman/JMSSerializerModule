@@ -2,10 +2,10 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\XmlDeserializationVisitor;
 use JMSSerializerModule\Options\Visitors;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class XmlDeserializationVisitorFactory
@@ -15,18 +15,17 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class XmlDeserializationVisitorFactory implements FactoryInterface
 {
     /**
-     * @param ServiceLocatorInterface $serviceLocator
-     * @return XmlDeserializationVisitor
+     * {@inheritDoc}
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $options = $serviceLocator->get('Configuration');
+        $options = $container->get('Configuration');
         $options = new Visitors($options['jms_serializer']['visitors']);
 
         $xmlOptions = $options->getXml();
         $visitor = new XmlDeserializationVisitor(
-            $serviceLocator->get('jms_serializer.naming_strategy'),
-            $serviceLocator->get('jms_serializer.object_constructor')
+            $container->get('jms_serializer.naming_strategy'),
+            $container->get('jms_serializer.object_constructor')
         );
         $visitor->setDoctypeWhitelist($xmlOptions['doctype_whitelist']);
         return $visitor;

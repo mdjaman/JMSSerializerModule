@@ -2,9 +2,9 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use JMS\Serializer\YamlSerializationVisitor;
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class YamlSerializationVisitorFactory
@@ -16,9 +16,9 @@ class YamlSerializationVisitorFactory implements FactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
-        $namingStrategy = $serviceLocator->get('jms_serializer.naming_strategy');
+        $namingStrategy = $container->get('jms_serializer.naming_strategy');
         return new YamlSerializationVisitor($namingStrategy);
     }
 }

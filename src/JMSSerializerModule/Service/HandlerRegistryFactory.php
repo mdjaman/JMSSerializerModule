@@ -2,10 +2,10 @@
 
 namespace JMSSerializerModule\Service;
 
+use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
 use JMS\Serializer\Handler\HandlerRegistry;
 use JMS\Serializer\Handler\SubscribingHandlerInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>
@@ -14,19 +14,22 @@ class HandlerRegistryFactory extends AbstractFactory
 {
 
     /**
-     * {@inheritDoc}
+     * @param ContainerInterface $container
+     * @param string $requestedName
+     * @param array|null $options
+     * @return HandlerRegistry
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var $options \JMSSerializerModule\Options\Handlers */
-        $options      = $this->getOptions($serviceLocator, 'handlers');
+        $options      = $this->getOptions($container, 'handlers');
         $handlerRegistry = new HandlerRegistry();
 
         foreach ($options->getSubscribers() as $subscriberName) {
             $subscriber = $subscriberName;
             if (is_string($subscriber)) {
-                if ($serviceLocator->has($subscriber)) {
-                    $subscriber = $serviceLocator->get($subscriber);
+                if ($container->has($subscriber)) {
+                    $subscriber = $container->get($subscriber);
                 } elseif (class_exists($subscriber)) {
                     $subscriber = new $subscriber();
                 }
