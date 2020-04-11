@@ -23,7 +23,7 @@ class MetadataCacheFactory extends AbstractFactory
         $options = $this->getOptions($container, 'metadata');
         if ($options->getCache() == 'none') {
             return null;
-        } elseif ($options->getCache() == 'file') {
+        } elseif ($options->getCache() === 'file') {
             $fileCache = $options->getFileCache();
             $dir = $fileCache['dir'];
             if (!file_exists($dir)) {

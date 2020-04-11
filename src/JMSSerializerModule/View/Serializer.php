@@ -12,6 +12,15 @@ use Zend\View\Helper\AbstractHelper;
 class Serializer extends AbstractHelper
 {
     /**
+     * @var array
+     */
+    protected $allowedFormats = [
+        'json',
+        'yml',
+        'xml',
+    ];
+
+    /**
      * @var SerializerInterface
      */
     protected $serializer;
@@ -26,12 +35,16 @@ class Serializer extends AbstractHelper
 
     /**
      * @param $object
-     * @param string $type
+     * @param string $format
      * @param SerializationContext|null $context
      * @return mixed|string
      */
-    public function __invoke($object, $type = 'json', SerializationContext $context = null)
+    public function __invoke($object, $format = 'json', SerializationContext $context = null)
     {
-        return $this->serializer->serialize($object, $type, $context);
+        if (! in_array($format, $this->allowedFormats)) {
+            $format = 'json';
+        }
+
+        return $this->serializer->serialize($object, $format, $context);
     }
 }
