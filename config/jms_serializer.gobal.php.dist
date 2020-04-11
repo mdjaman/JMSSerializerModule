@@ -1,0 +1,25 @@
+<?php
+/**
+ * JMSSerializerModule - jms_serializer.php
+ *
+ * Initial version by: marceldjaman
+ * Initial version created on: 4/11/20
+ */
+
+return [
+    'jms_serializer' => [
+        'handlers' => [],
+        'subscribers' => [],
+        'property_naming' => [
+            'separator' => '_',
+            'lowercase' => true,
+        ],
+        'metadata' => [
+            'cache' => 'file',
+            'file_cache' => [
+                'dir' => 'data/JMSSerializerModule/cache',
+            ]
+        ],
+        'visitors' => [],
+    ]
+];
