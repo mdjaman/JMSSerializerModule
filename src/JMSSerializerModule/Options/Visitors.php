@@ -14,26 +14,37 @@ class Visitors extends AbstractOptions
     /**
      * @var array
      */
-    protected $serialization = array();
+    protected $serialization = [
+        'json' => 'jms_serializer.json_serialization_visitor',
+        'xml' => 'jms_serializer.xml_serialization_visitor',
+        'yml' => 'jms_serializer.yaml_serialization_visitor',
+    ];
 
     /**
      * @var array
      */
-    protected $deserialization = array();
+    protected $deserialization = [
+        'json' => 'jms_serializer.json_deserialization_visitor',
+        'xml' => 'jms_serializer.xml_deserialization_visitor',
+    ];
 
     /**
      * Contains options for json visitor.
      *
      * @var array
      */
-    protected $json = array();
+    protected $json = [
+        'options' => 0,
+    ];
 
     /**
      * Contains options for xml visitor.
      *
      * @var array
      */
-    protected $xml = array();
+    protected $xml = [
+        'doctype_whitelist' => [],
+    ];
 
     /**
      * @param  array $subscribers
@@ -104,5 +115,4 @@ class Visitors extends AbstractOptions
     {
         return $this->xml;
     }
-
 }

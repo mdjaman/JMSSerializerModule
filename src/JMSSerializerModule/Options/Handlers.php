@@ -18,14 +18,27 @@ class Handlers extends AbstractOptions
      *
      * @var array
      */
-    protected $subscribers = array();
+    protected $subscribers = [
+        'jms_serializer.datetime_handler',
+        'jms_serializer.array_collection_handler',
+    ];
 
     /**
      * Contains option for the date handler.
      *
      * @var array
      */
-    protected $datetime = array();
+    protected $datetime = [];
+
+    public function __construct($options = null)
+    {
+        parent::__construct($options);
+
+        $this->datetime = [
+            'default_format' => \DateTime::ISO8601,
+            'default_timezone' => date_default_timezone_get(),
+        ];
+    }
 
     /**
      * @param  array $subscribers
@@ -63,5 +76,4 @@ class Handlers extends AbstractOptions
     {
         return $this->datetime;
     }
-
 }

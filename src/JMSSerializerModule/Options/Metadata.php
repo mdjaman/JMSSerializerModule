@@ -35,7 +35,7 @@ class Metadata extends AbstractOptions
      *
      * @var array
      */
-    protected $directories = array();
+    protected $directories = [];
 
     /**
      * @var string
@@ -55,7 +55,9 @@ class Metadata extends AbstractOptions
     /**
      * @var array
      */
-    protected $fileCache = array('dir' => 'data/JMSSerializerModule/cache');
+    protected $fileCache = [
+        'dir' => 'data/JMSSerializerModule/cache'
+    ];
 
     /**
      * @var bool
@@ -172,5 +174,4 @@ class Metadata extends AbstractOptions
     {
         return "doctrine.cache.{$this->annotationCache}";
     }
-
 }

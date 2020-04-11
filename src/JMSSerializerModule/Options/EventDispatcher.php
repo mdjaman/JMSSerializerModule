@@ -18,7 +18,9 @@ class EventDispatcher extends AbstractOptions
      *
      * @var array
      */
-    protected $subscribers = array();
+    protected $subscribers = [
+        'jms_serializer.doctrine_proxy_subscriber',
+    ];
 
     /**
      * @param  array $subscribers
@@ -37,5 +39,4 @@ class EventDispatcher extends AbstractOptions
     {
         return $this->subscribers;
     }
-
 }

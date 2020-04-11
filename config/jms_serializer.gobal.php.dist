@@ -8,18 +8,52 @@
 
 return [
     'jms_serializer' => [
-        'handlers' => [],
-        'subscribers' => [],
+        'handlers' => [
+            'datetime' => [
+                'default_format' => \DateTime::ISO8601,
+                'default_timezone' => date_default_timezone_get(),
+            ],
+            'subscribers' => [
+                'jms_serializer.datetime_handler',
+                'jms_serializer.array_collection_handler',
+            ],
+        ],
+        'eventdispatcher' => [
+            'subscribers' => [
+                'jms_serializer.doctrine_proxy_subscriber',
+            ],
+        ],
         'property_naming' => [
             'separator' => '_',
-            'lowercase' => true,
+            'lower_case' => true,
+            'enable_cache' => true,
         ],
         'metadata' => [
             'cache' => 'file',
+            'annotation_cache' => 'file',
+            'debug' => false,
             'file_cache' => [
-                'dir' => 'data/JMSSerializerModule/cache',
-            ]
+                'dir' => 'data/JMSSerializerModule',
+            ],
+            'infer_types_from_doctrine_metadata' => true,
+            'directories' => [],
         ],
-        'visitors' => [],
-    ]
+        'visitors' => [
+            'json' => [
+                'options' => 0,
+            ],
+            'xml' => [
+                'doctype_whitelist' => [],
+            ],
+            'serialization' => [
+                'json' => 'jms_serializer.json_serialization_visitor',
+                'xml' => 'jms_serializer.xml_serialization_visitor',
+                'yml' => 'jms_serializer.yaml_serialization_visitor',
+            ],
+            'deserialization' => [
+                'json' => 'jms_serializer.json_deserialization_visitor',
+                'xml' => 'jms_serializer.xml_deserialization_visitor',
+            ],
+        ],
+    ],
 ];
