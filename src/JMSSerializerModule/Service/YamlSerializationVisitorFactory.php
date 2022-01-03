@@ -4,7 +4,7 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\YamlSerializationVisitor;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class YamlSerializationVisitorFactory

@@ -8,7 +8,7 @@ use Doctrine\Common\Annotations\IndexedReader;
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\Metadata\Driver\AnnotationDriver;
 use JMSSerializerModule\Options\Metadata;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class MetadataDriverChainFactory

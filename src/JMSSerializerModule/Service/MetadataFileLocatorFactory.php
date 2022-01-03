@@ -5,7 +5,7 @@ namespace JMSSerializerModule\Service;
 use Interop\Container\ContainerInterface;
 use JMSSerializerModule\Options\Metadata;
 use Metadata\Driver\FileLocator;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class MetadataFileLocatorFactory

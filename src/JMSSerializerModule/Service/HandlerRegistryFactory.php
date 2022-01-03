@@ -22,7 +22,7 @@ class HandlerRegistryFactory extends AbstractFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var $options \JMSSerializerModule\Options\Handlers */
-        $options      = $this->getOptions($container, 'handlers');
+        $options = $this->getOptions($container, 'handlers');
         $handlerRegistry = new HandlerRegistry();
 
         foreach ($options->getSubscribers() as $subscriberName) {

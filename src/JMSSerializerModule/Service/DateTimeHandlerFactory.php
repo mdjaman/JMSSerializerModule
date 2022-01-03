@@ -5,7 +5,7 @@ namespace JMSSerializerModule\Service;
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\Handler\DateHandler;
 use JMSSerializerModule\Options\Handlers;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class DateTimeHandlerFactory
@@ -19,7 +19,7 @@ class DateTimeHandlerFactory implements FactoryInterface
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options
-     * @return DateHandler|object
+     * @return DateHandler
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

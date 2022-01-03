@@ -19,7 +19,7 @@
 
 namespace JMSSerializerModule\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Property naming options
@@ -30,6 +30,11 @@ use Zend\Stdlib\AbstractOptions;
  */
 class PropertyNaming extends AbstractOptions
 {
+    /**
+     * Turn off strict options mode
+     */
+    protected $__strictMode__ = false;
+
     /**
      * @var string
      */

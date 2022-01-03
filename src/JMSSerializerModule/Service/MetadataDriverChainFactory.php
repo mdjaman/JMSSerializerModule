@@ -4,7 +4,7 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use Metadata\Driver\DriverChain;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class MetadataDriverChainFactory

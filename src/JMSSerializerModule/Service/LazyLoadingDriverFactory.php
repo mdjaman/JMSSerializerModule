@@ -4,7 +4,7 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use JMSSerializerModule\Metadata\Driver\LazyLoadingDriver;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class LazyLoadingDriverFactory

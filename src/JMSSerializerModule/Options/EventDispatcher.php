@@ -2,7 +2,7 @@
 
 namespace JMSSerializerModule\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * HandlerRegistry options
@@ -11,6 +11,11 @@ use Zend\Stdlib\AbstractOptions;
  */
 class EventDispatcher extends AbstractOptions
 {
+    /**
+     * Turn off strict options mode
+     */
+    protected $__strictMode__ = false;
+
     /**
      * An array of subscribers. The array can contain the FQN of the
      * class to instantiate OR a string to be located with the

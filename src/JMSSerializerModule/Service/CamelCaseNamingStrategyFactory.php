@@ -5,7 +5,7 @@ namespace JMSSerializerModule\Service;
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\Naming\CamelCaseNamingStrategy;
 use JMSSerializerModule\Options\PropertyNaming;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class CamelCaseNamingStrategyFactory
@@ -19,7 +19,9 @@ class CamelCaseNamingStrategyFactory implements FactoryInterface
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options
-     * @return CamelCaseNamingStrategy|object
+     * @return CamelCaseNamingStrategy
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

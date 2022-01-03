@@ -19,7 +19,7 @@
 
 namespace JMSSerializerModule\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * Metadata options
@@ -30,6 +30,11 @@ use Zend\Stdlib\AbstractOptions;
  */
 class Metadata extends AbstractOptions
 {
+    /**
+     * Turn off strict options mode
+     */
+    protected $__strictMode__ = false;
+
     /**
      * Directories to locate the metadata
      *

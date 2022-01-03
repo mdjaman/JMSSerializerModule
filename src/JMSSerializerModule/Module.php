@@ -10,7 +10,7 @@
 
 namespace JMSSerializerModule;
 
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 
 /**
  * Base module for JMS Serializer

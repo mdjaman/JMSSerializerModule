@@ -3,7 +3,7 @@
 namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\AbstractFactoryInterface;
+use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>

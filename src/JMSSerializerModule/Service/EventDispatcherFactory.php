@@ -19,7 +19,7 @@ class EventDispatcherFactory extends AbstractFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var $options \JMSSerializerModule\Options\Handlers */
-        $options      = $this->getOptions($container, 'eventdispatcher');
+        $options = $this->getOptions($container, 'eventdispatcher');
         $handlerRegistry = new EventDispatcher();
 
         foreach ($options->getSubscribers() as $subscriberName) {

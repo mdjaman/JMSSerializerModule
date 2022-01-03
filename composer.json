@@ -1,6 +1,6 @@
 {
     "name": "mdjaman/jms-serializer-module",
-    "description": "Zend Framework 2 Module that integrates the jms serializer library",
+    "description": "Laminas Module that integrates the jms serializer library",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -11,9 +11,7 @@
         "yml",
         "jms",
         "module",
-        "zendframework",
-        "zf2",
-        "zf3"
+        "laminas"
     ],
     "authors": [
         {
@@ -42,12 +40,12 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
-        "zendframework/zend-servicemanager": "^3.0",
-        "zendframework/zend-stdlib": "^3.0",
-        "zendframework/zend-view": "2.*",
-        "doctrine/common": "2.8.*",
-        "jms/serializer": "1.*"
+        "php": "^7.4 || ^8.0",
+        "laminas/laminas-servicemanager": "^3.0",
+        "laminas/laminas-stdlib": "^3.0",
+        "laminas/laminas-view": "2.*",
+        "doctrine/common": "3.*",
+        "jms/serializer": "3.*"
     },
     "minimum-stability": "dev",
     "autoload": {
@@ -57,7 +55,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.x-dev"
+            "dev-master": "3.x-dev"
         }
     }
 }

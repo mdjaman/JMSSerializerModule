@@ -4,7 +4,7 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use RuntimeException;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Base ServiceManager factory to be extended
@@ -16,17 +16,18 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 abstract class AbstractFactory implements FactoryInterface
 {
     /**
-     * @var \Zend\Stdlib\AbstractOptions
+     * @var \Laminas\Stdlib\AbstractOptions
      */
     protected $options;
 
     /**
      * Gets options from configuration based on name.
      *
-     * @param  ContainerInterface $container
-     * @param  string $key
-     * @return \Zend\Stdlib\AbstractOptions
-     * @throws \RuntimeException
+     * @param ContainerInterface $container
+     * @param string $key
+     * @return \Laminas\Stdlib\AbstractOptions
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function getOptions(ContainerInterface $container, $key)
     {

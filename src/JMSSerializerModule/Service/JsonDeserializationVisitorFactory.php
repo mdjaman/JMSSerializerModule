@@ -4,7 +4,7 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use JMS\Serializer\JsonDeserializationVisitor;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Class JsonDeserializationVisitorFactory
@@ -18,7 +18,7 @@ class JsonDeserializationVisitorFactory implements FactoryInterface
      * @param ContainerInterface $container
      * @param string $requestedName
      * @param array|null $options
-     * @return JsonDeserializationVisitor|object
+     * @return JsonDeserializationVisitor
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {

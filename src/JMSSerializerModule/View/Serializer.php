@@ -4,7 +4,7 @@ namespace JMSSerializerModule\View;
 
 use JMS\Serializer\SerializationContext;
 use JMS\Serializer\SerializerInterface;
-use Zend\View\Helper\AbstractHelper;
+use Laminas\View\Helper\AbstractHelper;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>
@@ -39,7 +39,7 @@ class Serializer extends AbstractHelper
      * @param SerializationContext|null $context
      * @return mixed|string
      */
-    public function __invoke($object, $format = 'json', SerializationContext $context = null)
+    public function __invoke($object, string $format = 'json', SerializationContext $context = null)
     {
         if (! in_array($format, $this->allowedFormats)) {
             $format = 'json';
