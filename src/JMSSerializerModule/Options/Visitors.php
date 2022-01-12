@@ -20,7 +20,7 @@ class Visitors extends AbstractOptions
     /**
      * @var array
      */
-    protected $serialization = [
+    protected array $serialization = [
         'json' => 'jms_serializer.json_serialization_visitor',
         'xml' => 'jms_serializer.xml_serialization_visitor',
         'yml' => 'jms_serializer.yaml_serialization_visitor',
@@ -29,7 +29,7 @@ class Visitors extends AbstractOptions
     /**
      * @var array
      */
-    protected $deserialization = [
+    protected array $deserialization = [
         'json' => 'jms_serializer.json_deserialization_visitor',
         'xml' => 'jms_serializer.xml_deserialization_visitor',
     ];
@@ -39,7 +39,7 @@ class Visitors extends AbstractOptions
      *
      * @var array
      */
-    protected $json = [
+    protected array $json = [
         'options' => 0,
     ];
 
@@ -48,7 +48,7 @@ class Visitors extends AbstractOptions
      *
      * @var array
      */
-    protected $xml = [
+    protected array $xml = [
         'doctype_whitelist' => [],
     ];
 
@@ -56,7 +56,7 @@ class Visitors extends AbstractOptions
      * @param  array $subscribers
      * @return self
      */
-    public function setSerialization($subscribers)
+    public function setSerialization(array $subscribers): Visitors
     {
         $this->serialization = $subscribers;
         return $this;
@@ -65,7 +65,7 @@ class Visitors extends AbstractOptions
     /**
      * @return array
      */
-    public function getSerialization()
+    public function getSerialization(): array
     {
         return $this->serialization;
     }
@@ -73,15 +73,16 @@ class Visitors extends AbstractOptions
     /**
      * @param array $deserialization
      */
-    public function setDeserialization($deserialization)
+    public function setDeserialization(array $deserialization): Visitors
     {
         $this->deserialization = $deserialization;
+        return $this;
     }
 
     /**
      * @return array
      */
-    public function getDeserialization()
+    public function getDeserialization(): array
     {
         return $this->deserialization;
     }
@@ -90,7 +91,7 @@ class Visitors extends AbstractOptions
      * @param array $json
      * @return $this
      */
-    public function setJson($json)
+    public function setJson(array $json): Visitors
     {
         $this->json = $json;
         return $this;
@@ -99,7 +100,7 @@ class Visitors extends AbstractOptions
     /**
      * @return array
      */
-    public function getJson()
+    public function getJson(): array
     {
         return $this->json;
     }
@@ -108,7 +109,7 @@ class Visitors extends AbstractOptions
      * @param array $xml
      * @return $this
      */
-    public function setXml($xml)
+    public function setXml(array $xml): Visitors
     {
         $this->xml = $xml;
         return $this;
@@ -117,7 +118,7 @@ class Visitors extends AbstractOptions
     /**
      * @return array
      */
-    public function getXml()
+    public function getXml(): array
     {
         return $this->xml;
     }

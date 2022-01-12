@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of the JMSSerializerModule package.
  *
@@ -11,28 +10,25 @@
 
 namespace JMSSerializerModule;
 
-use JMS\Serializer\Metadata\Driver\PhpDriver;
 use JMS\Serializer\Metadata\Driver\XmlDriver;
 use JMS\Serializer\Metadata\Driver\YamlDriver;
 use JMSSerializerModule\Service\SerializerViewHelperFactory;
 
-return array(
+return [
     'service_manager' => [
-        'aliases' => array(
+        'aliases' => [
             'jms_serializer.metadata_driver' => 'jms_serializer.metadata.chain_driver',
             'jms_serializer.object_constructor' => 'jms_serializer.unserialize_object_constructor',
             'jms_serializer.metadata.yaml_driver' => YamlDriver::class,
             'jms_serializer.metadata.xml_driver' => XmlDriver::class,
-            'jms_serializer.metadata.php_driver' => PhpDriver::class,
-        ),
-        'factories' => array(
+        ],
+        'factories' => [
             'jms_serializer.handler_registry' => Service\HandlerRegistryFactory::class,
             'jms_serializer.datetime_handler' => Service\DateTimeHandlerFactory::class,
             'jms_serializer.event_dispatcher' => Service\EventDispatcherFactory::class,
             'jms_serializer.metadata.cache' => Service\MetadataCacheFactory::class,
             YamlDriver::class => Service\MetadataDriverFactory::class,
             XmlDriver::class => Service\MetadataDriverFactory::class,
-            PhpDriver::class => Service\MetadataDriverFactory::class,
             'jms_serializer.metadata.file_locator' => Service\MetadataFileLocatorFactory::class,
             'jms_serializer.metadata.annotation_driver' => Service\MetadataAnnotationDriverFactory::class,
             'jms_serializer.metadata.chain_driver' => Service\MetadataDriverChainFactory::class,
@@ -47,17 +43,68 @@ return array(
             'jms_serializer.xml_deserialization_visitor' => Service\XmlDeserializationVisitorFactory::class,
             'jms_serializer.yaml_serialization_visitor' => Service\YamlSerializationVisitorFactory::class,
             'jms_serializer.serializer' => Service\SerializerFactory::class,
-        ),
-        'invokables' => array(
+
+            'jms_serializer.serialization_graph_navigator' => Service\SerializationGraphNavigatorFactory::class,
+        ],
+        'invokables' => [
             'jms_serializer.identical_naming_strategy' => \JMS\Serializer\Naming\IdenticalPropertyNamingStrategy::class,
             'jms_serializer.unserialize_object_constructor' => \JMS\Serializer\Construction\UnserializeObjectConstructor::class,
             'jms_serializer.array_collection_handler' => \JMS\Serializer\Handler\ArrayCollectionHandler::class,
             'jms_serializer.doctrine_proxy_subscriber' => \JMS\Serializer\EventDispatcher\Subscriber\DoctrineProxySubscriber::class,
-        ),
+        ],
     ],
     'view_helpers' => [
-        'factories' => array(
+        'factories' => [
             'jmsSerializer' => SerializerViewHelperFactory::class,
-        ),
+        ],
     ],
-);
+    'jms_serializer' => [
+        'handlers' => [
+            'datetime' => [
+                'default_format' => \DateTime::ISO8601,
+                'default_timezone' => date_default_timezone_get(),
+            ],
+            'subscribers' => [
+                'jms_serializer.datetime_handler',
+                'jms_serializer.array_collection_handler',
+            ],
+        ],
+        'eventdispatcher' => [
+            'subscribers' => [
+                'jms_serializer.doctrine_proxy_subscriber',
+            ],
+        ],
+        'property_naming' => [
+            'separator' => '_',
+            'lower_case' => true,
+            'enable_cache' => true,
+        ],
+        'metadata' => [
+            'cache' => 'file',
+            'annotation_cache' => 'file',
+            'debug' => false,
+            'file_cache' => [
+                'dir' => 'data/JMSSerializerModule',
+            ],
+            'infer_types_from_doctrine_metadata' => true,
+            'directories' => [],
+        ],
+        'visitors' => [
+            'json' => [
+                'options' => 0,
+            ],
+            'xml' => [
+                'doctype_whitelist' => [],
+            ],
+            'serialization' => [
+                'json' => 'jms_serializer.json_serialization_visitor',
+                'xml' => 'jms_serializer.xml_serialization_visitor',
+                'yml' => 'jms_serializer.yaml_serialization_visitor',
+            ],
+            'deserialization' => [
+                'json' => 'jms_serializer.json_deserialization_visitor',
+                'xml' => 'jms_serializer.xml_deserialization_visitor',
+            ],
+        ],
+    ],
+];

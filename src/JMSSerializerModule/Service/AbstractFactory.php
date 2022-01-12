@@ -29,11 +29,11 @@ abstract class AbstractFactory implements FactoryInterface
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public function getOptions(ContainerInterface $container, $key)
+    public function getOptions(ContainerInterface $container, string $key)
     {
         $options = $container->get('Configuration');
         $options = $options['jms_serializer'];
-        $options = isset($options[$key]) ? $options[$key] : null;
+        $options = $options[$key] ?? null;
 
         if (null === $options) {
             throw new RuntimeException(sprintf(
@@ -52,5 +52,5 @@ abstract class AbstractFactory implements FactoryInterface
      * @abstract
      * @return string
      */
-    abstract public function getOptionsClass();
+    abstract public function getOptionsClass(): string;
 }

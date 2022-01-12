@@ -4,9 +4,18 @@ namespace JMSSerializerModule\Service;
 
 use Interop\Container\ContainerInterface;
 use InvalidArgumentException;
+use JMS\Serializer\Builder\DefaultDriverFactory;
+use JMS\Serializer\ContextFactory\CallableSerializationContextFactory;
+use JMS\Serializer\EventDispatcher\EventDispatcher;
+use JMS\Serializer\Expression\ExpressionEvaluator;
+use JMS\Serializer\GraphNavigatorInterface;
+use JMS\Serializer\Handler\HandlerRegistry;
+use JMS\Serializer\Naming\IdenticalPropertyNamingStrategy;
+use JMS\Serializer\Naming\SerializedNameAnnotationStrategy;
+use JMS\Serializer\SerializationContext;
 use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerBuilder;
 use JMS\Serializer\VisitorInterface;
-use PhpCollection\Map;
 
 /**
  * @author Martin Parsiegla <martin.parsiegla@gmail.com>
@@ -20,22 +29,50 @@ class SerializerFactory extends AbstractFactory
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         /** @var $options \JMSSerializerModule\Options\Visitors */
-        $options = $this->getOptions($container, 'visitors');
+        //$options = $this->getOptions($container, 'visitors');
+
+        $builder = new SerializerBuilder();
+
+//        $builder->configureHandlers(function(\JMS\Serializer\Handler\HandlerRegistry $registry) use ($container) {
+//            $registry->registerSubscribingHandler($container->get('jms_serializer.handler_registry'));
+//        });
+        $builder->setSerializationVisitor('json', new \JMS\Serializer\Visitor\Factory\JsonSerializationVisitorFactory());
+        $builder->setDeserializationVisitor('json', new \JMS\Serializer\Visitor\Factory\JsonDeserializationVisitorFactory());
+        //$builder->setExpressionEvaluator(new ExpressionEvaluator(new ExpressionLanguage()));
+        $namingStrategy = new SerializedNameAnnotationStrategy(new IdenticalPropertyNamingStrategy());
+        $builder->setPropertyNamingStrategy($namingStrategy);
+        $builder->setMetadataDriverFactory(new DefaultDriverFactory($namingStrategy));
+        $builder->setSerializationContextFactory(
+            new CallableSerializationContextFactory(static function () {
+                $context = SerializationContext::create();
+                $context->enableMaxDepthChecks();
+
+                return $context;
+            })
+        );
+
+        return $builder->build();
+
+        /*$navigatorFactories = [
+            GraphNavigatorInterface::DIRECTION_SERIALIZATION => $this->getSerializationNavigatorFactory($metadataFactory),
+            GraphNavigatorInterface::DIRECTION_DESERIALIZATION => $this->getDeserializationNavigatorFactory($metadataFactory),
+        ];
 
         return new Serializer(
             $container->get('jms_serializer.metadata_factory'),
-            $container->get('jms_serializer.handler_registry'),
-            $container->get('jms_serializer.object_constructor'),
-            $this->buildMap($container, $options->getSerialization()),
-            $this->buildMap($container, $options->getDeserialization()),
-            $container->get('jms_serializer.event_dispatcher')
-        );
+            [],
+            //$container->get('jms_serializer.handler_registry'),
+            //$container->get('jms_serializer.object_constructor'),
+            $options->getSerialization(),
+            $options->getDeserialization(),
+            //$container->get('jms_serializer.event_dispatcher')
+        );*/
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getOptionsClass()
+    public function getOptionsClass(): string
     {
         return 'JMSSerializerModule\Options\Visitors';
     }

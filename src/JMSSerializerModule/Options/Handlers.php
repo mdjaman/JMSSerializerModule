@@ -23,7 +23,7 @@ class Handlers extends AbstractOptions
      *
      * @var array
      */
-    protected $subscribers = [
+    protected array $subscribers = [
         'jms_serializer.datetime_handler',
         'jms_serializer.array_collection_handler',
     ];
@@ -33,8 +33,12 @@ class Handlers extends AbstractOptions
      *
      * @var array
      */
-    protected $datetime = [];
+    protected array $datetime = [];
 
+
+    /**
+     * @param $options
+     */
     public function __construct($options = null)
     {
         parent::__construct($options);
@@ -46,10 +50,10 @@ class Handlers extends AbstractOptions
     }
 
     /**
-     * @param  array $subscribers
+     * @param array $subscribers
      * @return self
      */
-    public function setSubscribers($subscribers)
+    public function setSubscribers(array $subscribers): Handlers
     {
         $this->subscribers = $subscribers;
         return $this;
@@ -58,17 +62,16 @@ class Handlers extends AbstractOptions
     /**
      * @return array
      */
-    public function getSubscribers()
+    public function getSubscribers(): array
     {
         return $this->subscribers;
     }
 
     /**
      * @param array $datetime
-     *
      * @return self
      */
-    public function setDatetime($datetime)
+    public function setDatetime(array $datetime): Handlers
     {
         $this->datetime = $datetime;
         return $this;
@@ -77,7 +80,7 @@ class Handlers extends AbstractOptions
     /**
      * @return array
      */
-    public function getDatetime()
+    public function getDatetime(): array
     {
         return $this->datetime;
     }

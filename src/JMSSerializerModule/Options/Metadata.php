@@ -40,41 +40,41 @@ class Metadata extends AbstractOptions
      *
      * @var array
      */
-    protected $directories = [];
+    protected array $directories = [];
 
     /**
      * @var string
      */
-    protected $cache = null;
+    protected ?string $cache = null;
 
     /**
      * @var string
      */
-    protected $annotationCache = 'array';
+    protected string $annotationCache = 'array';
 
     /**
      * @var bool
      */
-    protected $debug = false;
+    protected bool $debug = false;
 
     /**
      * @var array
      */
-    protected $fileCache = [
+    protected array $fileCache = [
         'dir' => 'data/JMSSerializerModule/cache'
     ];
 
     /**
      * @var bool
      */
-    protected $inferTypesFromDoctrineMetadata = true;
+    protected bool $inferTypesFromDoctrineMetadata = true;
 
     /**
      * @param string $cache
      *
      * @return self
      */
-    public function setCache($cache)
+    public function setCache(string $cache): Metadata
     {
         $this->cache = $cache;
         return $this;
@@ -83,7 +83,7 @@ class Metadata extends AbstractOptions
     /**
      * @return string
      */
-    public function getCache()
+    public function getCache(): ?string
     {
         return $this->cache;
     }
@@ -93,7 +93,7 @@ class Metadata extends AbstractOptions
      *
      * @return self
      */
-    public function setDirectories($directory)
+    public function setDirectories(array $directory): self
     {
         $this->directories = $directory;
         return $this;
@@ -102,7 +102,7 @@ class Metadata extends AbstractOptions
     /**
      * @return array
      */
-    public function getDirectories()
+    public function getDirectories(): array
     {
         return $this->directories;
     }
@@ -112,7 +112,7 @@ class Metadata extends AbstractOptions
      *
      * @return self
      */
-    public function setDebug($debug)
+    public function setDebug(bool $debug): self
     {
         $this->debug = $debug;
         return $this;
@@ -121,7 +121,7 @@ class Metadata extends AbstractOptions
     /**
      * @return boolean
      */
-    public function getDebug()
+    public function getDebug(): bool
     {
         return $this->debug;
     }
@@ -131,7 +131,7 @@ class Metadata extends AbstractOptions
      *
      * @return self
      */
-    public function setFileCache($fileCache)
+    public function setFileCache(array $fileCache)
     {
         $this->fileCache = $fileCache;
         return $this;
@@ -140,7 +140,7 @@ class Metadata extends AbstractOptions
     /**
      * @return array
      */
-    public function getFileCache()
+    public function getFileCache(): array
     {
         return $this->fileCache;
     }
@@ -150,32 +150,34 @@ class Metadata extends AbstractOptions
      *
      * @return self
      */
-    public function setInferTypesFromDoctrineMetadata($inferTypesFromDoctrineMetadata)
+    public function setInferTypesFromDoctrineMetadata(bool $inferTypesFromDoctrineMetadata): self
     {
         $this->inferTypesFromDoctrineMetadata = $inferTypesFromDoctrineMetadata;
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function getInferTypesFromDoctrineMetadata()
+    public function getInferTypesFromDoctrineMetadata(): bool
     {
         return $this->inferTypesFromDoctrineMetadata;
     }
 
     /**
      * @param string $annotationCache
+     * @return $this
      */
-    public function setAnnotationCache($annotationCache)
+    public function setAnnotationCache(string $annotationCache)
     {
         $this->annotationCache = $annotationCache;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getAnnotationCache()
+    public function getAnnotationCache(): string
     {
         return "doctrine.cache.{$this->annotationCache}";
     }

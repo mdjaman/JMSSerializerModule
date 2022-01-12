@@ -3,6 +3,7 @@
 namespace JMSSerializerModule\Metadata\Driver;
 
 use Interop\Container\ContainerInterface;
+use Metadata\ClassMetadata;
 use Metadata\Driver\DriverInterface;
 
 /**
@@ -13,12 +14,12 @@ class LazyLoadingDriver implements DriverInterface
     /**
      * @var ContainerInterface
      */
-    private $container;
+    private ContainerInterface $container;
 
     /**
      * @var string
      */
-    private $realDriverId;
+    private string $realDriverId;
 
     /**
      * LazyLoadingDriver constructor.
@@ -35,7 +36,7 @@ class LazyLoadingDriver implements DriverInterface
     /**
      * {@inheritdoc}
      */
-    public function loadMetadataForClass(\ReflectionClass $class)
+    public function loadMetadataForClass(\ReflectionClass $class): ?ClassMetadata
     {
         return $this->container->get($this->realDriverId)->loadMetadataForClass($class);
     }

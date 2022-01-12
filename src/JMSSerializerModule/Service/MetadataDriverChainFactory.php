@@ -23,10 +23,9 @@ class MetadataDriverChainFactory implements FactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $annotationDriver = $container->get('jms_serializer.metadata.annotation_driver');
-        $phpDriver = $container->get('jms_serializer.metadata.php_driver');
         $xmlDriver = $container->get('jms_serializer.metadata.xml_driver');
         $yamlDriver = $container->get('jms_serializer.metadata.yaml_driver');
-        $driverChain = array($yamlDriver, $xmlDriver, $phpDriver, $annotationDriver);
+        $driverChain = array($yamlDriver, $xmlDriver,  $annotationDriver);
         return new DriverChain($driverChain);
     }
 }

@@ -38,24 +38,24 @@ class PropertyNaming extends AbstractOptions
     /**
      * @var string
      */
-    protected $separator = '_';
+    protected string $separator = '_';
 
     /**
      * @var bool
      */
-    protected $lowerCase = true;
+    protected bool $lowerCase = true;
 
     /**
      * @var bool
      */
-    protected $enableCache = true;
+    protected bool $enableCache = true;
 
     /**
      * @param string $cache
      *
      * @return self
      */
-    public function setSeparator($cache)
+    public function setSeparator(string $cache)
     {
         $this->separator = $cache;
         return $this;
@@ -64,36 +64,36 @@ class PropertyNaming extends AbstractOptions
     /**
      * @return string
      */
-    public function getSeparator()
+    public function getSeparator(): string
     {
         return $this->separator;
     }
 
     /**
-     * @param boolean $debug
+     * @param bool $debug
      *
      * @return self
      */
-    public function setLowercase($debug)
+    public function setLowercase(bool $debug): self
     {
         $this->lowerCase = $debug;
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
-    public function getLowercase()
+    public function getLowercase(): bool
     {
         return $this->lowerCase;
     }
 
     /**
-     * @param boolean $inferTypesFromDoctrineMetadata
+     * @param bool $inferTypesFromDoctrineMetadata
      *
      * @return self
      */
-    public function setEnableCache($inferTypesFromDoctrineMetadata)
+    public function setEnableCache(bool $inferTypesFromDoctrineMetadata): self
     {
         $this->enableCache = $inferTypesFromDoctrineMetadata;
         return $this;
@@ -102,7 +102,7 @@ class PropertyNaming extends AbstractOptions
     /**
      * @return boolean
      */
-    public function getEnableCache()
+    public function getEnableCache(): bool
     {
         return $this->enableCache;
     }
