@@ -40,7 +40,7 @@ class MetadataCacheFactory extends AbstractFactory
     /**
      * {@inheritDoc}
      */
-    public function getOptionsClass()
+    public function getOptionsClass(): string
     {
         return 'JMSSerializerModule\Options\Metadata';
     }

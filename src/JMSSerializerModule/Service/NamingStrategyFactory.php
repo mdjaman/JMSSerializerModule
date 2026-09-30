@@ -31,7 +31,7 @@ class NamingStrategyFactory extends AbstractFactory
     /**
      * {@inheritdoc}
      */
-    public function getOptionsClass()
+    public function getOptionsClass(): string
     {
         return 'JMSSerializerModule\Options\PropertyNaming';
     }
