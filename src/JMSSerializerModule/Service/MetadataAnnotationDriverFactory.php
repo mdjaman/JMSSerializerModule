@@ -35,6 +35,7 @@ class MetadataAnnotationDriverFactory implements FactoryInterface
             new IndexedReader($annotationReader),
             $container->get($metadata->getAnnotationCache())
         );
-        return new AnnotationDriver($cachedReader);
+        $namingStrategy = $container->get('jms_serializer.naming_strategy');
+        return new AnnotationDriver($cachedReader, $namingStrategy);
     }
 }

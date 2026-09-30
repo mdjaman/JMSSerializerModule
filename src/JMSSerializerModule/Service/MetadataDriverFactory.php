@@ -28,6 +28,7 @@ class MetadataDriverFactory implements AbstractFactoryInterface
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
         $fileLocator = $container->get('jms_serializer.metadata.file_locator');
-        return new $requestedName($fileLocator);
+        $namingStrategy = $container->get('jms_serializer.naming_strategy');
+        return new $requestedName($fileLocator, $namingStrategy);
     }
 }
