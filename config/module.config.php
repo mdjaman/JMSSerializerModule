@@ -41,7 +41,6 @@ return [
             'jms_serializer.json_deserialization_visitor' => Service\JsonDeserializationVisitorFactory::class,
             'jms_serializer.xml_serialization_visitor' => Service\XmlSerializationVisitorFactory::class,
             'jms_serializer.xml_deserialization_visitor' => Service\XmlDeserializationVisitorFactory::class,
-            'jms_serializer.yaml_serialization_visitor' => Service\YamlSerializationVisitorFactory::class,
             'jms_serializer.serializer' => Service\SerializerFactory::class,
 
             'jms_serializer.serialization_graph_navigator' => Service\SerializationGraphNavigatorFactory::class,
@@ -99,7 +98,6 @@ return [
             'serialization' => [
                 'json' => 'jms_serializer.json_serialization_visitor',
                 'xml' => 'jms_serializer.xml_serialization_visitor',
-                'yml' => 'jms_serializer.yaml_serialization_visitor',
             ],
             'deserialization' => [
                 'json' => 'jms_serializer.json_deserialization_visitor',

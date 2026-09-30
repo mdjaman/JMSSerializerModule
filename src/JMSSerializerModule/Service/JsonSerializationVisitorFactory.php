@@ -27,8 +27,6 @@ class JsonSerializationVisitorFactory implements FactoryInterface
         $options = new Visitors($config['jms_serializer']['visitors']);
 
         $jsonOptions = $options->getJson();
-        $visitor = new JsonSerializationVisitor($container->get('jms_serializer.naming_strategy'));
-        $visitor->setOptions($jsonOptions['options']);
-        return $visitor;
+        return new JsonSerializationVisitor($jsonOptions['options']);
     }
 }
